@@ -1,7 +1,9 @@
 source $setup
 
 tar -xf $llvm_src
-rm -r cmake
+if [ -d cmake ]; then
+  rm -r cmake
+fi
 mv llvm-* llvm
 
 tar -xf $src
