@@ -36,67 +36,9 @@
          # Ad-hoc sign the dylibs
          add_custom_command(TARGET ${libname}
            POST_BUILD  
---- compiler-rt-14.0.6.src/lib/fuzzer/FuzzerDefs.h
-+++ compiler-rt-14.0.6.src.patched/lib/fuzzer/FuzzerDefs.h
-@@ -13,6 +13,7 @@
- #include <cassert>
- #include <cstddef>
- #include <cstdint>
-+#include <vector>
- #include <cstdlib>
- #include <cstring>
- #include <string>
---- compiler-rt-14.0.6.src/lib/fuzzer/FuzzerIO.h
-+++ compiler-rt-14.0.6.src.patched/lib/fuzzer/FuzzerIO.h
-@@ -11,6 +11,8 @@
- #ifndef LLVM_FUZZER_IO_H
- #define LLVM_FUZZER_IO_H
- 
-+#include <string>
-+#include <vector>
- #include "FuzzerDefs.h"
- 
- namespace fuzzer {
---- compiler-rt-14.0.6.src/lib/fuzzer/FuzzerCommand.h
-+++ compiler-rt-14.0.6.src.patched/lib/fuzzer/FuzzerCommand.h
-@@ -12,6 +12,7 @@
- #define LLVM_FUZZER_COMMAND_H
- 
- #include <algorithm>
-+#include <vector>
- #include "FuzzerDefs.h"
- #include "FuzzerIO.h"
- 
---- compiler-rt-14.0.6.src/lib/fuzzer/FuzzerDriver.cpp
-+++ compiler-rt-14.0.6.src.patched/lib/fuzzer/FuzzerDriver.cpp
-@@ -8,6 +8,8 @@
- //===----------------------------------------------------------------------===//
- // Driver for libFuzzer tests. Executes all tests in the test directory.
- //===----------------------------------------------------------------------===//
-+#include <string>
-+#include <vector>
- 
- #include "FuzzerCommand.h"
- #include "FuzzerIO.h"
---- compiler-rt-14.0.6.src/lib/fuzzer/FuzzerExtFunctionsDlsym.cpp
-+++ compiler-rt-14.0.6.src.patched/lib/fuzzer/FuzzerExtFunctionsDlsym.cpp
-@@ -14,6 +14,8 @@
- //
- //===----------------------------------------------------------------------===//
- 
-+#include <string>
-+#include <vector>
- #include "FuzzerIO.h"
- 
- namespace fuzzer {
---- compiler-rt-14.0.6.src/lib/fuzzer/FuzzerDataFlowTrace.cpp
-+++ compiler-rt-14.0.6.src.patched/lib/fuzzer/FuzzerDataFlowTrace.cpp
-@@ -8,6 +8,8 @@
- //===----------------------------------------------------------------------===//
- // Implementation of DataFlowTrace.
- //===----------------------------------------------------------------------===//
-+#include <string>
-+#include <vector>
- 
- #include "FuzzerDataFlowTrace.h"
- #include "FuzzerIO.h"
+#REMOVED# Patching of Fuzzer files is no longer needed since we're disabling the fuzzer component
+#REMOVED# Patching of Fuzzer files is no longer needed since we're disabling the fuzzer component
+#REMOVED# Patching of Fuzzer files is no longer needed since we're disabling the fuzzer component
+#REMOVED# Patching of Fuzzer files is no longer needed since we're disabling the fuzzer component
+#REMOVED# Patching of Fuzzer files is no longer needed since we're disabling the fuzzer component
+#REMOVED# Patching of Fuzzer files is no longer needed since we're disabling the fuzzer component
