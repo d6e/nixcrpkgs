@@ -149,8 +149,15 @@ let
 
     _cflags = "-target ${host} --sysroot ${sdk} " +
       "-I${sdk}/usr/include -mlinker-version=${ld.apple_version}";
+    
+    # For macOS 15.x SDKs, we need to use a different approach to handle missing headers
+    # The compiler-rt build requires C++ standard library headers that aren't in the SDK
     CC = "clang ${_cflags}";
-    CXX = "clang++ ${_cflags} -stdlib=libc++ -cxx-isystem ${sdk}/usr/include/c++";
+    # Use -stdlib=libc++ to tell clang to use the libc++ standard library
+    # Our stub headers should be enough to get through the build
+    CXX = "clang++ ${_cflags} -stdlib=libc++ " +
+      "-isystem $out/tmp/c++ " +
+      "-isystem $out/tmp/c++/v1";
 
     cmake_flags =
       "-DCMAKE_BUILD_TYPE=Release " +
@@ -163,7 +170,11 @@ let
       "-DCMAKE_AR=${ar}/bin/${host}-ar " +
       "-DCMAKE_RANLIB=${misc}/bin/${host}-ranlib " +
       "-DCOMPILER_RT_BUILD_SANITIZERS=OFF " +
-      "-DCOMPILER_RT_BUILD_XRAY=OFF";
+      "-DCOMPILER_RT_BUILD_XRAY=OFF " +
+      "-DCOMPILER_RT_BUILD_FUZZER=OFF " +
+      "-DCOMPILER_RT_BUILD_ORC=OFF " +
+      "-DCOMPILER_RT_BUILD_PROFILE=OFF " +
+      "-DCOMPILER_RT_CXX_INCLUDE_DIRS=$out/tmp/c++";
 
     inherit host sdk;
   };
