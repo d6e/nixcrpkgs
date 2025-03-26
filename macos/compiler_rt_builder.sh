@@ -140,12 +140,9 @@ EOF
 mkdir build
 cd build
 # Only build builtins as that's all we need for basic functionality
-# Disable components not already disabled in default.nix that require C++ headers
+# Other components are disabled in default.nix
 cmake ../src -GNinja -DCMAKE_INSTALL_PREFIX=$out $cmake_flags \
-  -DCOMPILER_RT_BUILD_BUILTINS=ON \
-  -DCOMPILER_RT_BUILD_LIBFUZZER=OFF \
-  -DCOMPILER_RT_BUILD_MEMPROF=OFF \
-  -DCOMPILER_RT_BUILD_GWP_ASAN=OFF
+  -DCOMPILER_RT_BUILD_BUILTINS=ON
 
 ninja -j$NIX_BUILD_CORES || {
   echo "Build failed, creating more detailed error log..."
