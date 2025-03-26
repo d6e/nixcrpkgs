@@ -156,8 +156,8 @@ let
     # Use -stdlib=libc++ to tell clang to use the libc++ standard library
     # Our stub headers should be enough to get through the build
     CXX = "clang++ ${_cflags} -stdlib=libc++ " +
-      "-isystem ${sdk}/usr/include/c++ " +
-      "-isystem ${sdk}/usr/include/c++/v1";
+      "-isystem $out/tmp/c++ " +
+      "-isystem $out/tmp/c++/v1";
 
     cmake_flags =
       "-DCMAKE_BUILD_TYPE=Release " +
@@ -172,7 +172,7 @@ let
       "-DCOMPILER_RT_BUILD_SANITIZERS=OFF " +
       "-DCOMPILER_RT_BUILD_XRAY=OFF " +
       "-DCOMPILER_RT_BUILD_FUZZER=OFF " +
-      "-DCOMPILER_RT_CXX_INCLUDE_DIRS=${sdk}/usr/include/c++;${sdk}/usr/include/c++/v1";
+      "-DCOMPILER_RT_CXX_INCLUDE_DIRS=$out/tmp/c++";
 
     inherit host sdk;
   };

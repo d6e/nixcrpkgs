@@ -12,10 +12,10 @@ cd ..
 
 # Create C++ header directories if they don't exist
 # These are needed for the macOS 15.x SDK compatibility
-mkdir -p $sdk/usr/include/c++/v1
+mkdir -p $out/tmp/c++/v1
 
 # Create minimal stub headers for the fuzzer component
-cat > $sdk/usr/include/c++/v1/vector << EOF
+cat > $out/tmp/c++/v1/vector << EOF
 #ifndef _LIBCPP_VECTOR
 #define _LIBCPP_VECTOR
 
@@ -53,7 +53,7 @@ public:
 #endif // _LIBCPP_VECTOR
 EOF
 
-cat > $sdk/usr/include/c++/v1/string << EOF
+cat > $out/tmp/c++/v1/string << EOF
 #ifndef _LIBCPP_STRING
 #define _LIBCPP_STRING
 
@@ -90,7 +90,7 @@ inline bool operator==(const char* lhs, const string& rhs) { return true; }
 #endif // _LIBCPP_STRING
 EOF
 
-cat > $sdk/usr/include/c++/v1/algorithm << EOF
+cat > $out/tmp/c++/v1/algorithm << EOF
 #ifndef _LIBCPP_ALGORITHM
 #define _LIBCPP_ALGORITHM
 
@@ -114,7 +114,7 @@ namespace std {
 #endif // _LIBCPP_ALGORITHM
 EOF
 
-cat > $sdk/usr/include/c++/v1/memory << EOF
+cat > $out/tmp/c++/v1/memory << EOF
 #ifndef _LIBCPP_MEMORY
 #define _LIBCPP_MEMORY
 
