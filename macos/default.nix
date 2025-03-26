@@ -59,7 +59,10 @@ let
       # "-DCMAKE_BUILD_TYPE=Debug " +
       "-DLLVM_TARGETS_TO_BUILD=X86\;ARM\;AArch64 " +
       "-DLLVM_INCLUDE_BENCHMARKS=OFF " +
-      "-DLLVM_ENABLE_ASSERTIONS=OFF";
+      "-DLLVM_ENABLE_ASSERTIONS=OFF " +
+      # LLVM 16 supports LLVM_ENABLE_PROJECTS for better component management
+      "-DLLVM_ENABLE_PROJECTS=clang " +
+      "-DLLVM_INSTALL_UTILS=ON";
   };
 
   tapi = native.make_derivation rec {
