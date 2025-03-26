@@ -139,7 +139,18 @@ EOF
 
 mkdir build
 cd build
-cmake ../src -GNinja -DCMAKE_INSTALL_PREFIX=$out $cmake_flags
+# Only build builtins as that's all we need for basic functionality
+# Disable everything else to avoid C++ headers and fuzzer components
+cmake ../src -GNinja -DCMAKE_INSTALL_PREFIX=$out $cmake_flags \
+  -DCOMPILER_RT_BUILD_BUILTINS=ON \
+  -DCOMPILER_RT_BUILD_FUZZER=OFF \
+  -DCOMPILER_RT_BUILD_LIBFUZZER=OFF \
+  -DCOMPILER_RT_BUILD_SANITIZERS=OFF \
+  -DCOMPILER_RT_BUILD_XRAY=OFF \
+  -DCOMPILER_RT_BUILD_ORC=OFF \
+  -DCOMPILER_RT_BUILD_PROFILE=OFF \
+  -DCOMPILER_RT_BUILD_MEMPROF=OFF \
+  -DCOMPILER_RT_BUILD_GWP_ASAN=OFF
 
 ninja -j$NIX_BUILD_CORES || {
   echo "Build failed, creating more detailed error log..."
