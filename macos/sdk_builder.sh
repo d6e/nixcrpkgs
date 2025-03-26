@@ -1,6 +1,7 @@
 source $setup
 
-tar -xf $src
+# Use --warning=no-unknown-keyword to ignore the LIBARCHIVE.xattr warnings
+tar -xf $src --warning=no-unknown-keyword
 mv MacOSX*.sdk $out
 
 cd $out
