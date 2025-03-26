@@ -3,3 +3,4 @@
 /gcroots
 /gcroots.drv
 /nixdb.sqlite*
+llvm-project

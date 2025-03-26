@@ -60,9 +60,32 @@ let
       "-DLLVM_TARGETS_TO_BUILD=X86\;ARM\;AArch64 " +
       "-DLLVM_INCLUDE_BENCHMARKS=OFF " +
       "-DLLVM_ENABLE_ASSERTIONS=OFF " +
-      # LLVM 16 supports LLVM_ENABLE_PROJECTS for better component management
+      # Limit build to just the core clang project, without extra tools
       "-DLLVM_ENABLE_PROJECTS=clang " +
-      "-DLLVM_INSTALL_UTILS=ON";
+      "-DCLANG_ENABLE_BOOTSTRAP=OFF " +
+      "-DLLVM_TOOL_CLANG_TOOLS_EXTRA_BUILD=OFF " +
+      "-DLLVM_INSTALL_UTILS=ON " +
+      # Disable LLVM_EXTERNAL_PROJECTS to avoid the unittest directory issue
+      "-DLLVM_EXTERNAL_PROJECTS= " +
+      # Skip building tests and examples to simplify build
+      "-DLLVM_INCLUDE_TESTS=OFF " +
+      "-DLLVM_INCLUDE_EXAMPLES=OFF " +
+      "-DLLVM_BUILD_EXAMPLES=OFF " +
+      "-DCLANG_BUILD_EXAMPLES=OFF " +
+      # Disable additional features to reduce build complexity
+      "-DLLVM_ENABLE_BINDINGS=OFF " +
+      "-DLLVM_ENABLE_OCAMLDOC=OFF " +
+      "-DCLANG_ENABLE_ARCMT=OFF " +
+      "-DCLANG_ENABLE_STATIC_ANALYZER=OFF " +
+      # Ensure CMake can find the required modules
+      "-DCMAKE_MODULE_PATH=/build/cmake/Modules " +
+      "-DLLVM_CMAKE_DIR=/build/cmake " + 
+      "-DLLVM_CMAKE_MODULES_DIR=/build/cmake/Modules " +
+      # Skip looking for optional dependencies
+      "-DLLVM_ENABLE_ZLIB=OFF " +
+      "-DLLVM_ENABLE_LIBXML2=OFF " +
+      "-DLLVM_ENABLE_LIBEDIT=OFF " +
+      "-DLLVM_ENABLE_TERMINFO=OFF";
   };
 
   tapi = native.make_derivation rec {
