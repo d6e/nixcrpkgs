@@ -15,7 +15,7 @@ cd build
 
 ../src/configure --prefix=$out $configure_flags
 
-make $make_flags
+make -j$NIX_BUILD_CORES $make_flags
 
 make $install_targets
 

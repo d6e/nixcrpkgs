@@ -20,6 +20,6 @@ mkdir build
 cd build
 
 ../src/configure --prefix=$out $configure_flags
-make
+make -j$NIX_BUILD_CORES
 make install
 

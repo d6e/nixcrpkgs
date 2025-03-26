@@ -16,7 +16,7 @@ cd build
 
 ../pkgconf/configure --prefix=$out
 
-make
+make -j$NIX_BUILD_CORES
 
 make install
 

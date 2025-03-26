@@ -14,14 +14,14 @@ if [ -n "$just_headers" ]; then
   mkdir build_headers
   cd build_headers
   ../mingw-w64/mingw-w64-headers/configure --prefix=$out $configure_flags
-  make
+  make -j$NIX_BUILD_CORES
   make install
   cd ..
 else
   mkdir build_crt_and_headers
   cd build_crt_and_headers
   ../mingw-w64/configure --prefix=$out $configure_flags
-  make
+  make -j$NIX_BUILD_CORES
   make install
   cd ..
 
@@ -29,7 +29,7 @@ else
   cd build_winpthreads
   LDFLAGS="-L${out}/lib" ../mingw-w64/mingw-w64-libraries/winpthreads/configure \
       --host=$host --prefix=$out --disable-shared --enable-static
-  make
+  make -j$NIX_BUILD_CORES
   make install
   cd ..
 fi

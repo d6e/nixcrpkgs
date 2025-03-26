@@ -5,7 +5,7 @@ tar -xf $src
 mv linux-$version linux
 
 mkdir -p obj/staged
-make -C linux headers_install \
+make -j$NIX_BUILD_CORES -C linux headers_install \
   ARCH=$linux_arch \
   O=$(pwd)/obj \
   INSTALL_HDR_PATH=$out
