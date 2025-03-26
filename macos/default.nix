@@ -170,7 +170,9 @@ let
       "-DCMAKE_AR=${ar}/bin/${host}-ar " +
       "-DCMAKE_RANLIB=${misc}/bin/${host}-ranlib " +
       "-DCOMPILER_RT_BUILD_SANITIZERS=OFF " +
-      "-DCOMPILER_RT_BUILD_XRAY=OFF";
+      "-DCOMPILER_RT_BUILD_XRAY=OFF " +
+      "-DCOMPILER_RT_BUILD_FUZZER=OFF " +
+      "-DCOMPILER_RT_CXX_INCLUDE_DIRS=${sdk}/usr/include/c++;${sdk}/usr/include/c++/v1";
 
     inherit host sdk;
   };
