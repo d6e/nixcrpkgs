@@ -25,21 +25,21 @@ let
 
   host = "${arch}-apple-${darwin_name}";
 
-  clang_version = "14.0.6";  # 2022-06-24
+  clang_version = "20.1.1";  # 2024-06-17
 
   clang_src = nixpkgs.fetchurl {
     url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-${clang_version}/clang-${clang_version}.src.tar.xz";
-    sha256 = "K1hHtqYxGLnv5chVSDY8gf/glrZsOzZ16VPiY0KuQDE=";
+    sha256 = "12ywf5f6x0gmaas3cxmvwzjbmi5gi54fbabnycnk59lpzn686kkx";
   };
 
   llvm_src = nixpkgs.fetchurl {
     url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-${clang_version}/llvm-${clang_version}.src.tar.xz";
-    sha256 = "BQki7KrKV4H99mMeqSvHFRg/IC+dLxUUcibwI0FPYZo=";
+    sha256 = "1pdkpv4rlg1989ahjrd3zmmla9dik9qjnzmz651nc8dc4sbli6iy";
   };
 
   compiler-rt_src = nixpkgs.fetchurl {
     url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-${clang_version}/compiler-rt-${clang_version}.src.tar.xz";
-    sha256 = "iN8wOEDKj7/5ROFeYcFBIm/nn10rjon7AkJk13hBoC4=";
+    sha256 = "0kggb4ncifdh7f28q6arl8lv1rlk4x4ssfnznndfbzyvgh8m7xy4";
   };
 
   clang = native.make_derivation rec {

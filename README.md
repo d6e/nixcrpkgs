@@ -21,7 +21,7 @@ Packages collection (Nixpkgs)][nixpkgs].
     and [GCC](https://gcc.gnu.org/) 12.2.0
   - Linux (i686, x86_64, armv6, aarch64) using [musl](https://www.musl-libc.org/)
     and [GCC](https://gcc.gnu.org/) 14.1.0
-  - macOS (x86_64 and ARM) using [Clang](https://clang.llvm.org/) 14.0.6
+  - macOS (x86_64 and ARM) using [Clang](https://clang.llvm.org/) 20.1.1
 - Supported languages for cross-compiling:
   - C
   - C++
