@@ -14,7 +14,7 @@ mkdir build
 cd build
 cmake ../src -GNinja -DCMAKE_INSTALL_PREFIX=$out $cmake_flags
 
-ninja
+ninja -j$NIX_BUILD_CORES
 ninja install
 
 cp ../src/LICENSE.TXT $out/LICENSE.txt

@@ -35,15 +35,21 @@ CXXFLAGS="-std=gnu++17 $CFLAGS"
 
 LDFLAGS="$(pkg-config --libs libtapi) -ldl -lpthread"
 
-for f in ../ld64/src/ld/*.c ../ld64/src/3rd/*.c ../ld64/src/3rd/**/*.c; do
-  echo "compiling $f"
-  eval "clang -c $CFLAGS $f -o $(basename $f).o"
-done
+# Use GNU parallel if available, otherwise fallback to serial compilation
+if command -v parallel &>/dev/null; then
+  find ../ld64/src/ld -name "*.c" ../ld64/src/3rd -name "*.c" | parallel -j$NIX_BUILD_CORES "echo compiling {} && clang -c $CFLAGS {} -o $(basename {}).o"
+  find ../ld64/src -name "*.cpp" | parallel -j$NIX_BUILD_CORES "echo compiling {} && clang++ -c $CXXFLAGS {} -o $(basename {}).o"
+else
+  for f in ../ld64/src/ld/*.c ../ld64/src/3rd/*.c ../ld64/src/3rd/**/*.c; do
+    echo "compiling $f"
+    eval "clang -c $CFLAGS $f -o $(basename $f).o"
+  done
 
-for f in $(find ../ld64/src -name \*.cpp); do
-  echo "compiling $f"
-  eval "clang++ -c $CXXFLAGS $f -o $(basename $f).o"
-done
+  for f in $(find ../ld64/src -name \*.cpp); do
+    echo "compiling $f"
+    eval "clang++ -c $CXXFLAGS $f -o $(basename $f).o"
+  done
+fi
 
 clang++ *.o $LDFLAGS -o $host-ld
 

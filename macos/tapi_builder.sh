@@ -21,9 +21,9 @@ cmake ../src/llvm \
  -DCMAKE_INSTALL_PREFIX=$out \
  -DTAPI_REPOSITORY_STRING=$TAPI_REPOSITORY_STRING
 
-make clangBasic
-make libtapi
-make install-libtapi install-tapi-headers
+make -j$NIX_BUILD_CORES clangBasic
+make -j$NIX_BUILD_CORES libtapi
+make -j$NIX_BUILD_CORES install-libtapi install-tapi-headers
 
 mkdir -p $out/lib/pkgconfig
 cat > $out/lib/pkgconfig/libtapi.pc <<END

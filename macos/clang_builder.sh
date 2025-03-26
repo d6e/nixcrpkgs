@@ -20,9 +20,8 @@ cd build
 
 cmake ../llvm -GNinja -DDEFAULT_SYSROOT=$out -DCMAKE_INSTALL_PREFIX=$out $cmake_flags
 
-# We use -j options below so we can avoid running out of RAM on
-# systems with several cores and little RAM.
+# Use NIX_BUILD_CORES for parallelization
 
-ninja -j2
+ninja -j$NIX_BUILD_CORES
 
-ninja -j1 install
+ninja install

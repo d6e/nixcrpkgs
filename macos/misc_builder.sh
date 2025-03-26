@@ -37,10 +37,15 @@ CFLAGS+=" -DHAVE_BCMP -DHAVE_BZERO -DHAVE_BCOPY -DHAVE_INDEX -DHAVE_RINDEX"
 
 LDFLAGS="-ldl -lm -lpthread"
 
-for f in ../libstuff/*.c; do
-  echo "compiling $f"
-  eval "gcc -c $CFLAGS $f -o $(basename $f).o"
-done
+# Use GNU parallel if available, otherwise fallback to serial compilation
+if command -v parallel &>/dev/null; then
+  find ../libstuff -name "*.c" | parallel -j$NIX_BUILD_CORES "echo compiling {} && gcc -c $CFLAGS {} -o $(basename {}).o"
+else
+  for f in ../libstuff/*.c; do
+    echo "compiling $f"
+    eval "gcc -c $CFLAGS $f -o $(basename $f).o"
+  done
+fi
 
 echo building install_name_tool
 eval "gcc ../misc/install_name_tool.c *.o $CFLAGS $LDFLAGS -o install_name_tool"

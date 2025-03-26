@@ -39,10 +39,15 @@ CXXFLAGS="-std=gnu++17 $CFLAGS"
 
 LDFLAGS="-ldl -lpthread"
 
-for f in ../ar/*.c ../libstuff/*.c; do
-  echo "compiling $f"
-  eval "gcc -c $CFLAGS $f -o $(basename $f).o"
-done
+# Use GNU parallel if available, otherwise fallback to serial compilation
+if command -v parallel &>/dev/null; then
+  find ../ar ../libstuff -name "*.c" | parallel -j$NIX_BUILD_CORES "echo compiling {} && gcc -c $CFLAGS {} -o $(basename {}).o"
+else
+  for f in ../ar/*.c ../libstuff/*.c; do
+    echo "compiling $f"
+    eval "gcc -c $CFLAGS $f -o $(basename $f).o"
+  done
+fi
 
 gcc *.o $LDFLAGS -o $host-ar
 
