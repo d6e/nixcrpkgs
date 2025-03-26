@@ -163,7 +163,13 @@ let
       "-DCMAKE_AR=${ar}/bin/${host}-ar " +
       "-DCMAKE_RANLIB=${misc}/bin/${host}-ranlib " +
       "-DCOMPILER_RT_BUILD_SANITIZERS=OFF " +
-      "-DCOMPILER_RT_BUILD_XRAY=OFF";
+      "-DCOMPILER_RT_BUILD_XRAY=OFF " +
+      "-DCOMPILER_RT_BUILD_LIBFUZZER=OFF " +
+      "-DCOMPILER_RT_BUILD_ORC=OFF " +
+      "-DCOMPILER_RT_BUILD_PROFILE=OFF " +
+      "-DCOMPILER_RT_INCLUDE_TESTS=OFF " +
+      "-DCOMPILER_RT_EXCLUDE_ATOMIC_BUILTIN=ON " +
+      "-DHAVE_RPC_XDR_H=OFF";
 
     inherit host sdk;
   };

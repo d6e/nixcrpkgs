@@ -25,6 +25,11 @@
    option(COMPILER_RT_ENABLE_IOS "Enable building for iOS" On)
    option(COMPILER_RT_ENABLE_WATCHOS "Enable building for watchOS - Experimental" Off)
    option(COMPILER_RT_ENABLE_TVOS "Enable building for tvOS - Experimental" Off)
++  option(COMPILER_RT_BUILD_LIBFUZZER "Build libFuzzer" Off)
++  option(COMPILER_RT_BUILD_ORC "Build ORC runtime" Off)
++  option(COMPILER_RT_BUILD_PROFILE "Build profile runtime" Off)
++  option(COMPILER_RT_BUILD_SANITIZERS "Build sanitizers runtime" Off)
++  option(COMPILER_RT_INCLUDE_TESTS "Include compiler-rt tests" Off)
 --- compiler-rt-14.0.6.src/cmake/Modules/AddCompilerRT.cmake
 +++ compiler-rt-14.0.6.src.patched/cmake/Modules/AddCompilerRT.cmake
 @@ -372,7 +372,7 @@
