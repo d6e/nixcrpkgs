@@ -36,9 +36,4 @@
          # Ad-hoc sign the dylibs
          add_custom_command(TARGET ${libname}
            POST_BUILD  
-#REMOVED# Patching of Fuzzer files is no longer needed since we're disabling the fuzzer component
-#REMOVED# Patching of Fuzzer files is no longer needed since we're disabling the fuzzer component
-#REMOVED# Patching of Fuzzer files is no longer needed since we're disabling the fuzzer component
-#REMOVED# Patching of Fuzzer files is no longer needed since we're disabling the fuzzer component
-#REMOVED# Patching of Fuzzer files is no longer needed since we're disabling the fuzzer component
-#REMOVED# Patching of Fuzzer files is no longer needed since we're disabling the fuzzer component
+# Patching of Fuzzer files is no longer needed since we're disabling the fuzzer component
