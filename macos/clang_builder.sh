@@ -73,6 +73,10 @@ cmake ../llvm -GNinja \
   -DDEFAULT_SYSROOT=$out \
   -DCMAKE_INSTALL_PREFIX=$out \
   -DCMAKE_MODULE_PATH=$(pwd)/../cmake/modules \
+  -DLLVM_INSTALL_UTILS=ON \
+  -DLLVM_UTILS_INSTALL_DIR="bin" \
+  -DLLVM_INSTALL_UTILDIR="$out/bin" \
+  -DLLVM_ENABLE_IDE=OFF \
   $cmake_flags
 
 # Use NIX_BUILD_CORES for parallelization

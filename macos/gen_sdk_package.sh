@@ -153,7 +153,7 @@ else
   fi
 fi
 
-SDKS=$(ls | grep -E "^MacOSX\d.*" | grep -v "Patch")
+SDKS=$(ls | grep -E "^MacOSX(15|14|13|12|11|10).*" | grep -v "Patch")
 
 if [ -z "$SDKS" ]; then
     echo "No SDK found" 1>&2

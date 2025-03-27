@@ -15,13 +15,14 @@ let
   nixpkgs = native.nixpkgs;
 
   # macOS 11 is the first version to support ARM and it was released in 2020,
-  # so it seems reasonable to specify it as the minimum version which various
-  # tools ask for, but I'm not sure what all the implications are.
+  # For MacOSX 15.x SDK, we need to set the minimum version higher
+  # macOS 11.0 or higher is required for Apple Silicon support
   macos_version_min = "11.0";
 
-  # This is the Darwin version corresponding to macOS 11.0 according to
+  # This is the Darwin version corresponding to macOS
   # https://en.wikipedia.org/wiki/Darwin_(operating_system)
-  darwin_name = "darwin20.1";
+  # darwin24.0 corresponds to macOS 15.0
+  darwin_name = "darwin24.0";
 
   host = "${arch}-apple-${darwin_name}";
 
@@ -65,6 +66,7 @@ let
       "-DCLANG_ENABLE_BOOTSTRAP=OFF " +
       "-DLLVM_TOOL_CLANG_TOOLS_EXTRA_BUILD=OFF " +
       "-DLLVM_INSTALL_UTILS=ON " +
+      "-DLLVM_UTILS_INSTALL_DIR=bin " +
       # Disable LLVM_EXTERNAL_PROJECTS to avoid the unittest directory issue
       "-DLLVM_EXTERNAL_PROJECTS= " +
       # Skip building tests and examples to simplify build
