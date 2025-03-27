@@ -25,8 +25,9 @@ cd ..
 mkdir -p third-party/unittest
 ln -s $(pwd)/third-party llvm/third-party
 
-# Set up CMake modules directly in the expected location for absolute paths
+# Set up CMake modules in a directory structure we control
 mkdir -p /build/cmake/Modules
+mkdir -p "$out/cmake/Modules"
 cp -r llvm/cmake/* /build/cmake/
 cp -r llvm/cmake/modules/* /build/cmake/Modules/
 
@@ -77,6 +78,7 @@ cmake ../llvm -GNinja \
   -DLLVM_UTILS_INSTALL_DIR="bin" \
   -DLLVM_INSTALL_UTILDIR="$out/bin" \
   -DLLVM_ENABLE_IDE=OFF \
+  -DCMAKE_INSTALL_CMAKEDIR="$out/cmake" \
   $cmake_flags
 
 # Use NIX_BUILD_CORES for parallelization
